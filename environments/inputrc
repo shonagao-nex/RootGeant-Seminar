@@ -1,0 +1,5 @@
+set completion-ignore-case on
+set colored-stats on
+set colored-completion-prefix on
+set match-hidden-files off
+set visible-stats on

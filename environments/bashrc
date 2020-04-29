@@ -1,0 +1,92 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+#export ROOTSYS=/usr/local/cern/root-5.34.36
+export ROOTSYS=/usr/local/cern/root-6.12.06
+export PATH=$PATH:$ROOTSYS/bin/
+export LD_LIBRARY_PATH=$ROOTSYS/lib
+export G4INSTALL=/usr/local/cern/geant4.10.04
+#export G4LIBS=$G4INSTALL/lib64/Geant4-10.4.2
+export G4LIBS=$G4INSTALL/lib64
+
+export CERN=/home/wasou/Downloads/cernlib_20190121
+export CERN_LEVEL=2005
+export CERN_ROOT=$CERN/$CERN_LEVEL
+export CERNLIB=$CERN_ROOT/lib
+export CERNLIBDIR=$CERNLIB
+export CERNPATH=$CERNLIB
+export PATH=$CERN_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$CERNLIB:$LD_LIBRARY_PATH
+
+
+# User specific aliases and functions
+alias ls='ls -CF --color=auto'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias rmf='rm -rf'
+alias less='less -M'
+alias clean='rm -f *~'
+alias vi='vim'
+alias em='emacs'
+alias xterm='xterm &'
+alias gterm='gnome-terminal --geometry 85x57 &'
+#alias evals='eval `ssh-agent`'
+#alias evalk='eval `ssh-agent -k`'
+alias root='root -l'
+alias su='su -l'
+alias rs='set noglob; eval resize'
+#alias memclean='echo 3 > /proc/sys/vm/drop_chaches'
+#alias display='eog'
+alias sl='ls'
+
+#alias ssh
+##alias lambda 'ssh -X nagao@lambda.phys.tohoku.ac.jp'
+alias lam='ssh -Y lambda'
+alias farm='ssh -Y farm'
+#alias f0=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm0'
+#alias f1=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm1'
+#alias f2=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm2'
+#alias f3=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm3'
+#alias f4=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm4'
+#alias f5=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm5'
+#alias f6=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm6'
+#alias f7=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm7'
+#alias f8=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm8'
+#alias f9=  'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm9'
+#alias f10= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm10'
+#alias f11= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm11'
+#alias f12= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm12'
+#alias f13= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm13'
+#alias f14= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm14'
+#alias f15= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm15'
+#alias f17= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm17'
+#alias f18= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm18'
+#alias f19= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm19'
+#alias f37= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm37'
+#alias f38= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm38'
+#alias f39= 'ssh -Yi /home/wasou/.ssh/id_rsa.farm nagao@farm39'
+#alias pi1= 'ssh -X pi@172.25.24.185'
+alias jlab='ssh -Y snagao@login.jlab.org'
+#alias mainz= 'ssh -Y mainz'
+#alias a1iana= 'ssh -Y a1iana'
+#alias kinoko= 'ssh -Y unidaq@172.25.27.224'
+
+### KiNOKO ###
+export KINOKO_ROOT=/home/wasou/Downloads/kinoko-2017-04-22/kinoko
+export KINOKO_XTERM=/usr/bin/xterm
+export KINOKO_RSH=/usr/bin/ssh
+export KINOKO_CONTROL_PORT_BASE=40000
+export KINOKO_DATASTREAM_PORT_BASE=42000
+export KINOKO_SHELL_PORT_BASE=45000
+export KCOM_PATH=.:$KINOKO_ROOT/bin
+export KORB_PROJECT_PATH=$KINOKO_ROOT
+export PATH=$PATH:$KINOKO_ROOT/bin
+
+

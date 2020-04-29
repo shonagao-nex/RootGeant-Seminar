@@ -1,0 +1,87 @@
+" フォント
+"set guifont=Migu_1M:h12
+"set guifont=Osaka－等幅:h12
+set encoding=utf-8
+scriptencoding utf-8
+
+set fileencoding=utf-8
+set fileencodings=utf-8,uso-2022-jp,euc-jp,cp932,sjis
+set fileformats=unix,dos,mac
+set ambiwidth=double
+
+" メニューの文字化け対策
+source $VIMRUNTIME/delmenu.vim
+set langmenu=ja_jp,utf-8
+source $VIMRUNTIME/menu.vim
+
+" 画面表示
+"set title
+set laststatus=2
+set cmdheight=2
+set showmode
+set showcmd
+set ruler
+set number
+set showmatch
+set matchtime=10
+"syntax on
+
+" カーソル
+"set cursorline
+"set cursorcolumn
+"set whichwrap=b,s,h,l,<,>,[,]
+
+" タブ インデント
+set expandtab
+set tabstop=2
+set autoindent
+"set smartindent
+set shiftwidth=2
+set softtabstop=2
+
+" 文字検索
+set history=100
+set incsearch
+set ignorecase
+set smartcase
+set wrapscan
+set hlsearch
+" nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+" 音マウス設定
+set visualbell t_vb=
+set mouse=a
+
+" 補完
+augroup auto_comment_off
+  autocmd!
+  autocmd BufEnter * setlocal formatoptions-=r
+  autocmd BufEnter * setlocal formatoptions-=o
+augroup END
+
+" ウィンドウ設定
+colorscheme delek
+"set columns=80
+"set lines=50
+
+" コロンセミコロン入れ替え
+"noremap ; :
+"noremap : ;
+
+" バックアップ設定
+set noswapfile
+set nobackup
+set viminfo=
+set noundofile
+
+set nocp 
+filetype plugin on 
+
+"au FileType vim setlocal foldmethod=marker
+"au FileType text setlocal foldmethod=indent
+" マイショートカット
+nnoremap zl <C-w>>
+nnoremap zh <C-w><
+nnoremap zk <C-w>+
+nnoremap zj <C-w>-
+
