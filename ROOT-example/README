@@ -1,0 +1,103 @@
+##############################################################
+## Examples of root macro
+## The following macros work on ROOT v6.20.04
+## 2016/10 Sho Nagao
+##############################################################
+
+##############################################################
+## example1-1.cc
+Make a canvas and plot a graph with simple brankets
+$ root example1-1.cc
+or
+$ root
+> .x example1-1.cc
+
+##############################################################
+## example1-2.cc
+Same results as example1-1.cc, different way.
+> .L example1-2.cc
+> example1();
+or
+> example2(double val);
+
+##############################################################
+## example1-3.cc
+Same results as example1-2.cc example2(). Set points on the other function.
+> .L example1-3.cc
+> example(double val);
+
+##############################################################
+## example2-1.cc
+Make a histogram, Fill events with a normal distribution, Fitting.
+> .L example2-1.cc
+> example(double mean, double width);
+
+##############################################################
+## example2-2.cc
+Similar results as example2-1.cc. Add labels, legend etc...
+> .L example2-2.cc
+> example(double mean, double width);
+
+##############################################################
+## example2-3.cc
+Similar results as example2-1.cc. Plot two histograms. Show the fitting results. Save the canvas. A spetial environment .rootlogon.C and .rootmacro.cc are necessary.
+> .L example2-3.cc
+> example(double mean, double width);
+
+##############################################################
+## example3-1.cc - example3-3.cc
+Execute root macro files with several methods.
+## example3-1.cc
+Same as before.
+> .L example3-1.cc
+> example(double mean, double width);
+## example3-2.cc
+Compile with ROOT. Faster than example3-1.cc
+> .L example3-2.cc++
+> example(double mean, double width);
+## example3-3.cc
+Compile with g++. Fastest.
+$ make
+$ ./example3-3 (terminate with Crtl+C)
+
+##############################################################
+## example4-1.cc
+Make tree.
+> .L example4-1.cc
+> example();
+
+##############################################################
+## example4-2.cc
+Several methods making, reading tree. example4-1.root is necessary.
+> .L example4-2.cc
+> example1();  // Draw val1 on a 1D histogram.
+> example2();  // Draw a 2D histogram.
+> example3();  // Draw a histogram defining bins.
+> example4();  // Draw several histograms
+> example5();  // Draw a histogram with a Project method.
+> example6();  // Draw histograms with a SetBranchAddress method.
+
+##############################################################
+## example5-1.cc
+Generate rundom events. Basic on MonteCarlo.
+> .L example5-1.cc
+> example();
+
+##############################################################
+## example5-2.cc
+Generate rundom events with the inversion method.
+> .L example5-2.cc
+> example();
+
+##############################################################
+## example5-3.cc
+Generate rundom events with the Accept/Reject method.
+> .L example5-3.cc
+> example();
+
+
+
+
+
+
+
