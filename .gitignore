@@ -32,6 +32,6 @@
 *.app
 
 *.root
-Geant4-example/build/*
-Geant4-example/Log/*
-Geant4-example/G4History.macro
+*build
+*Log
+*G4History.macro

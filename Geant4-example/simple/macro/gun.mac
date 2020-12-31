@@ -1,0 +1,9 @@
+###for batch run###
+/run/initialize
+/tracking/verbose 0
+/process/verbose 0
+#/hits/verbose 0
+/control/verbose 0
+/run/verbose 0
+/run/particle/verbose 0
+/run/beamOn 1000

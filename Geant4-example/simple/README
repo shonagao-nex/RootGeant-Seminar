@@ -1,0 +1,41 @@
+####################################
+## Simple Geant4 for your example ##
+## 2020/12 Sho Nagao              ##
+####################################
+
+This is an example for the simplest geant4 code.
+This code is developped on geant4.10.07.
+
+##############################################
+How to
+1. Prepare directories
+$ mkdir root     # directory for output files
+$ mkdir build    # directory for execute files
+
+2. Compile (required cmake v3)
+$ ./compile.sh
+or
+$ cd build
+$ cmake3 ../
+$ make
+$ cd -
+
+3. Execute
+$ ./build/main                                      # with visualization
+or
+$ ./build/main macro/gun.mac 1000 param/input.in    # batch mode
+or
+$ ./run.sh 0                                        # batch mode
+##############################################
+
+##############################################
+Directories
+  build    # make, exe files
+  include  # header files
+  macro    # macro files
+  param    # input files
+  root     # output files
+  src      # source files
+##############################################
+
+
