@@ -12,7 +12,10 @@ How to
 $ mkdir root     # directory for output files
 $ mkdir build    # directory for execute files
 
-2. Compile (required cmake v3)
+2. Set Environment (e.g. farm, bash)
+$ source /usr/local/cern/geant4.10.05.p01/bin/geant4.sh
+
+3. Compile (required cmake v3)
 $ ./compile.sh
 or
 $ cd build
@@ -20,7 +23,7 @@ $ cmake3 ../
 $ make
 $ cd -
 
-3. Execute
+4. Execute
 $ ./build/main                                      # with visualization
 or
 $ ./build/main macro/gun.mac 1000 param/input.in    # batch mode
