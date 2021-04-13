@@ -1,4 +1,4 @@
-void example1(){
+void example1(){                          // same result as example1-1.cc, different method
   TGraph *g = new TGraph();
   g->SetPoint(0,1.,1.1);
   g->SetPoint(1,2.,1.9);
@@ -10,7 +10,7 @@ void example1(){
   g->Draw("APL");
 }
 
-void example2(double val){
+void example2(double val){                // different method part2. 3rd point is a valiable
   TGraph *g = new TGraph();
   g->SetPoint(0,1.,1.1);
   g->SetPoint(1,2.,1.9);

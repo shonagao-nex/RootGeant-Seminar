@@ -1,8 +1,6 @@
 {
   gROOT->SetStyle("Plain");
   gROOT->LoadMacro("~/.rootmacro.cc");
-//  gROOT->LoadMacro("~/.rootnuclei.cc");
-  gROOT->LoadMacro("~/.rootkinematics.cc");
   gStyle->SetOptDate(0);
   gStyle->SetHistFillStyle(3002);
   gStyle->SetHistFillColor(0);

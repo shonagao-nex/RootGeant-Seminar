@@ -1,3 +1,4 @@
+// Other method. compile macro with g++ compiler. Fast! I prefer.
 #include <iostream>
 #include <string>
 #include <stdio.h>

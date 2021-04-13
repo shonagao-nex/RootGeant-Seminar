@@ -75,10 +75,10 @@ void example6(){
   SetTH2(h1,"example6 h1","val2","val1",0.);
   SetTH2(h2,"example6 h2","val2","val1",0.);
 
-  int ENum = tree->GetEntries();
+  int ENum = tree->GetEntries();                   // Get number of all entries.
 
   for(int n=0;n<ENum;n++){
-    tree->GetEntry(n);
+    tree->GetEntry(n);                             // Get branches in enrgy n.
     h1->Fill(val2,val1);
     if(evID<2000){
       h2->Fill(val2,val1);

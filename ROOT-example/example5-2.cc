@@ -4,7 +4,7 @@ void example(){
 
   gRandom->SetSeed(0);
   for(int i=0;i<1E+5;i++){
-    double x = -log(1. - gRandom->Uniform(0.,1.));
+    double x = -log(1. - gRandom->Uniform(0.,1.));  // Random generation with inverse function exp(x)
     h->Fill(x);
   }
 

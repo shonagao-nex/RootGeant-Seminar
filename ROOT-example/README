@@ -2,6 +2,11 @@
 ## Examples of root macro
 ## The following macros work on ROOT v6.20.04
 ## 2016/10 Sho Nagao
+## 2021/04 Update, Sho Nagao
+## 
+## example1: Graph
+## example2: Histogram
+## example3: compile method
 ##############################################################
 
 ##############################################################
@@ -46,7 +51,7 @@ Similar results as example2-1.cc. Plot two histograms. Show the fitting results.
 
 ##############################################################
 ## example3-1.cc - example3-3.cc
-Execute root macro files with several methods.
+Execute root macro files with several methods. 
 ## example3-1.cc
 Same as before.
 > .L example3-1.cc
@@ -55,6 +60,9 @@ Same as before.
 Compile with ROOT. Faster than example3-1.cc
 > .L example3-2.cc++
 > example(double mean, double width);
+note:
+> .L example3-2.cc+g  (output debug information)
+> .L example3-2.cc+o  (with optimization)
 ## example3-3.cc
 Compile with g++. Fastest.
 $ make

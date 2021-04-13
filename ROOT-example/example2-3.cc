@@ -6,7 +6,7 @@ void example(double mean = 10., double wid = 2.){
   f->SetParameters(10,mean,wid);
   SetTF1(f,4,2,7);
 
-  TH1D *h1 = new TH1D("h1","h1",100,min_x,max_x);
+  TH1D *h1 = new TH1D("h1","h1",100,min_x,max_x);   // Set titles with same method as example2-2.cc
   h1->SetTitle("Example2  h1");
   h1->GetXaxis()->SetTitle("X (mm)");
   h1->GetXaxis()->CenterTitle();
@@ -20,7 +20,7 @@ void example(double mean = 10., double wid = 2.){
   h1->SetFillColor(3);
   h1->SetStats(kFALSE);
 
-  TH1D *h2 = new TH1D("h2","h2",100,min_x,max_x);
+  TH1D *h2 = new TH1D("h2","h2",100,min_x,max_x);   // Set titles with special function
   SetTH1(h2,"Example2  h2","X (mm)",Form("counts / %.1lf mm",(max_x-min_x)/100.),1,3004,38);
 
   for(int i=0;i<100000;i++){
@@ -31,14 +31,14 @@ void example(double mean = 10., double wid = 2.){
 
   double par[3], epar;
   h1->Fit(f,"0Q","",min_x,max_x);
-  f->GetParameters(&par[0]);
-  epar = f->GetParError(2);
-  cout<<Form("Constant : %e",par[0])<<endl;
+  f->GetParameters(&par[0]);                      // Get parameters of "f"
+  epar = f->GetParError(2);                       // Get an error of 3rd parameter
+  cout<<Form("Constant : %e",par[0])<<endl;       // Output results in a terminal
   cout<<Form("Mean     : %lf",par[1])<<endl;
   cout<<Form("Sigma    : %.3lf",par[2])<<endl;
 
   double max = h1->GetMaximum();
-  TLatex *t = new TLatex(par[1]+1.,max*0.95,Form("#sigma = %.3lf #pm %.3lf mm",par[2],epar));
+  TLatex *t = new TLatex(par[1]+1.,max*0.95,Form("#sigma = %.3lf #pm %.3lf mm",par[2],epar));  // Set Text
   t->SetTextSize(0.04);
   t->SetTextColor(2);
   t->SetTextFont(42);
@@ -51,8 +51,8 @@ void example(double mean = 10., double wid = 2.){
   h1->Draw();
   f->Draw("same");
   t->Draw();
-  c1->Print("c1.png");
-  c1->Print("c1.pdf");
-  c1->Print("c1.ps");
+  c1->Print("c1.png");     // Save c1 canvas to PNG file
+  c1->Print("c1.pdf");     // Save c1 canvas to PDF file
+  c1->Print("c1.ps");      // Save c1 canvas to ps file
 }
 

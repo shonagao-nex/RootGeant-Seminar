@@ -11,7 +11,7 @@ void example(){
     double yy = gRandom->Uniform(0.,1.);
     double y  = 1. - x;
     h1->Fill(x);
-    if( yy < y ) h2->Fill(x);
+    if( yy < y ) h2->Fill(x);                   // Fill random events with the rejection method
   }
 
   TCanvas *c1 = new TCanvas("c1","c1",800,600);

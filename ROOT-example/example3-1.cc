@@ -1,3 +1,4 @@
+// same example as example2. No compile, direct root operation. Simple and easy! but, slow!!
 void example(double mean = 10., double wid = 2.){
   double min_x = mean-wid*5;
   double max_x = mean+wid*5;

@@ -1,3 +1,4 @@
+// Other method. compile a macro with ROOT compiler. Fast!
 #include <iostream>
 #include <string>
 #include <stdio.h>
