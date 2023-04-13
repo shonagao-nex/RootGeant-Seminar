@@ -1,0 +1,71 @@
+set encoding=utf-8
+scriptencoding utf-8
+
+set fileencoding=utf-8
+set fileencodings=utf-8,uso-2022-jp,euc-jp,cp932,sjis
+set fileformats=unix,dos,mac
+set ambiwidth=double
+
+source $VIMRUNTIME/delmenu.vim
+set langmenu=ja_jp,utf-8
+source $VIMRUNTIME/menu.vim
+
+set laststatus=2
+set cmdheight=2
+set showmode
+set showcmd
+set ruler
+set number
+set showmatch
+set matchtime=10
+syntax on
+
+set expandtab
+set tabstop=2
+set autoindent
+"set smartindent
+set shiftwidth=2
+set softtabstop=2
+
+set history=100
+set incsearch
+set ignorecase
+set smartcase
+set wrapscan
+set hlsearch
+autocmd ColorScheme * hi Search ctermbg=darkgray
+autocmd ColorScheme * hi Search ctermfg=White
+" nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+set visualbell t_vb=
+"set mouse=a
+
+augroup auto_comment_off
+  autocmd!
+  autocmd BufEnter * setlocal formatoptions-=r
+  autocmd BufEnter * setlocal formatoptions-=o
+augroup END
+
+"colorscheme delek
+"colorscheme hybrid
+"colorscheme jellybeans
+colorscheme elflord
+"colorscheme murphy
+"colorscheme ron
+"colorscheme torte
+
+set noswapfile
+set nobackup
+set viminfo=
+set noundofile
+
+filetype plugin on 
+
+set foldmethod=manual
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
+nnoremap zl <C-w>>
+nnoremap zh <C-w><
+nnoremap zk <C-w>+
+nnoremap zj <C-w>-

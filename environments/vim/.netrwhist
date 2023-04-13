@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/admin/Downloads/root_git/README'
+let g:netrw_dirhist_2='/home/admin/Downloads/root_git'
+let g:netrw_dirhist_3='/home/admin/Downloads/geant4_git/ReleaseNotes'
+let g:netrw_dirhist_4='/home/admin/.vim'
+let g:netrw_dirhist_5='/home/nagao/.ssh'
+let g:netrw_dirhist_6='/home/nagao/github/nks2/simulation/bpm/param/seed'
+let g:netrw_dirhist_7='/home/nagao/HIHR_ver2/Geant4_source'

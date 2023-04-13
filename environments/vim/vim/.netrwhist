@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/etc/init.d'
+let g:netrw_dirhist_2='/data/40a/ELS/nagao/github/macro-files/MissingMass_Calc/param'
+let g:netrw_dirhist_3='/data/40a/ELS/nagao/github'
+let g:netrw_dirhist_4='/data/40a/ELS/nagao/github/g4-gene/script'
+let g:netrw_dirhist_5='/data/40a/ELS/nagao/github/macro-files/MissingMass_Calc/param'

@@ -1,0 +1,40 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+HISTCONTROL=ignoreboth
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+shopt -u histappend
+export HISTTIMEFORMAT='%F %T '
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+
+### ROOT ###
+export ROOTSYS=/usr/local/share/applications/root_v6.24.08
+source $ROOTSYS/bin/thisroot.sh
+### GEANT4 ###
+export G4INSTALL=/usr/local/share/applications/geant4.10.7.4
+source $G4INSTALL/bin/geant4.sh
+
+# User specific aliases and functions
+eval `dircolors -b ~/.colorrc`
+alias ls='ls -CF --color=auto'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias cd='cd -P'
+alias vi='vim'
+alias root='root -l'
+alias clean='rm -f *~'

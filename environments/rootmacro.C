@@ -6,7 +6,7 @@ const double PI = 4.*atan(1.);
 const double deg_to_rad = PI / 180.;
 const double rad_to_deg = 180. / PI;
 const double sigma_to_fwhm = 2.*sqrt(2.*log(2.));
-const double fwhm_to_sigma = 1./(2.*sqrt(2.*log(2.)));
+const double fwhm_to_sigma = 1./sigma_to_fwhm;
 const double cm_to_barn = 1e+24;
 const double alpha = 1./137.035999074; // fine structure constant
 const double hbar = 6.58211928*1e-22;  // Planc constant (reduced) (MeV x s)
@@ -46,17 +46,15 @@ void SetTH1(TH1 *h, TString name, TString xname, TString yname, int LColor=1, in
   h->GetXaxis()->SetTitleSize(0.06);
   h->GetXaxis()->SetLabelFont(42);
   h->GetXaxis()->SetLabelOffset(0.01);
-  h->GetXaxis()->SetLabelSize(0.045);
 
   h->GetYaxis()->SetTitle(yname);
   h->GetYaxis()->CenterTitle();
   h->GetYaxis()->SetTitleFont(42);
-  h->GetYaxis()->SetTitleOffset(1.20);
+  h->GetYaxis()->SetTitleOffset(1.10);
   h->GetYaxis()->SetTitleSize(0.06);
   h->GetYaxis()->SetLabelFont(42);
   h->GetYaxis()->SetLabelOffset(0.01);
-  h->GetYaxis()->SetLabelSize(0.045);
-  ((TGaxis*)h->GetYaxis())->SetMaxDigits(4);
+  ((TGaxis*)h->GetYaxis())->SetMaxDigits(5);
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -76,17 +74,15 @@ void SetTH2(TH2 *h, TString name, TString xname, TString yname, double min=0.8){
   h->GetXaxis()->SetTitleSize(0.06);
   h->GetXaxis()->SetLabelFont(42);
   h->GetXaxis()->SetLabelOffset(0.01);
-  h->GetXaxis()->SetLabelSize(0.045);
 
   h->GetYaxis()->SetTitle(yname);
   h->GetYaxis()->CenterTitle();
   h->GetYaxis()->SetTitleFont(42);
-  h->GetYaxis()->SetTitleOffset(1.2);
+  h->GetYaxis()->SetTitleOffset(1.0);
   h->GetYaxis()->SetTitleSize(0.06);
   h->GetYaxis()->SetLabelFont(42);
   h->GetYaxis()->SetLabelOffset(0.01);
-  h->GetYaxis()->SetLabelSize(0.045);
-  ((TGaxis*)h->GetYaxis())->SetMaxDigits(4);
+  ((TGaxis*)h->GetYaxis())->SetMaxDigits(5);
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -101,16 +97,14 @@ void SetGr(TGraph *gr, TString name, TString xname, TString yname, int LColor=1,
   gr->GetXaxis()->SetTitleSize(0.06);
   gr->GetXaxis()->SetLabelFont(42);
   gr->GetXaxis()->SetLabelOffset(0.01);
-  gr->GetXaxis()->SetLabelSize(0.045);
 
   gr->GetYaxis()->SetTitle(yname);
   gr->GetYaxis()->CenterTitle();
   gr->GetYaxis()->SetTitleFont(42);
-  gr->GetYaxis()->SetTitleOffset(1.20);
+  gr->GetYaxis()->SetTitleOffset(1.00);
   gr->GetYaxis()->SetTitleSize(0.06);
   gr->GetYaxis()->SetLabelFont(42);
   gr->GetYaxis()->SetLabelOffset(0.01);
-  gr->GetYaxis()->SetLabelSize(0.045);
   ((TGaxis*)gr->GetYaxis())->SetMaxDigits(4);
 
   gr->SetLineColor(LColor);
@@ -133,16 +127,14 @@ void SetGr(TGraphErrors *gr, TString name, TString xname, TString yname, int LCo
   gr->GetXaxis()->SetTitleSize(0.06);
   gr->GetXaxis()->SetLabelFont(42);
   gr->GetXaxis()->SetLabelOffset(0.01);
-  gr->GetXaxis()->SetLabelSize(0.045);
 
   gr->GetYaxis()->SetTitle(yname);
   gr->GetYaxis()->CenterTitle();
   gr->GetYaxis()->SetTitleFont(42);
-  gr->GetYaxis()->SetTitleOffset(1.20);
+  gr->GetYaxis()->SetTitleOffset(1.00);
   gr->GetYaxis()->SetTitleSize(0.06);
   gr->GetYaxis()->SetLabelFont(42);
   gr->GetYaxis()->SetLabelOffset(0.01);
-  gr->GetYaxis()->SetLabelSize(0.045);
   ((TGaxis*)gr->GetYaxis())->SetMaxDigits(4);
 
   gr->SetLineColor(LColor);
@@ -165,16 +157,14 @@ void SetGr(TGraphAsymmErrors *gr, TString name, TString xname, TString yname, in
   gr->GetXaxis()->SetTitleSize(0.06);
   gr->GetXaxis()->SetLabelFont(42);
   gr->GetXaxis()->SetLabelOffset(0.01);
-  gr->GetXaxis()->SetLabelSize(0.045);
 
   gr->GetYaxis()->SetTitle(yname);
   gr->GetYaxis()->CenterTitle();
   gr->GetYaxis()->SetTitleFont(42);
-  gr->GetYaxis()->SetTitleOffset(1.20);
+  gr->GetYaxis()->SetTitleOffset(1.00);
   gr->GetYaxis()->SetTitleSize(0.06);
   gr->GetYaxis()->SetLabelFont(42);
   gr->GetYaxis()->SetLabelOffset(0.01);
-  gr->GetYaxis()->SetLabelSize(0.045);
   ((TGaxis*)gr->GetYaxis())->SetMaxDigits(4);
 
   gr->SetLineColor(LColor);
@@ -197,7 +187,6 @@ void SetGr(TGraph2D *gr, TString name, TString xname, TString yname, TString zna
   gr->GetXaxis()->SetTitleSize(0.06);
   gr->GetXaxis()->SetLabelFont(42);
   gr->GetXaxis()->SetLabelOffset(0.01);
-  gr->GetXaxis()->SetLabelSize(0.045);
 
   gr->GetYaxis()->SetTitle(yname);
   gr->GetYaxis()->CenterTitle();
@@ -206,7 +195,6 @@ void SetGr(TGraph2D *gr, TString name, TString xname, TString yname, TString zna
   gr->GetYaxis()->SetTitleSize(0.06);
   gr->GetYaxis()->SetLabelFont(42);
   gr->GetYaxis()->SetLabelOffset(0.01);
-  gr->GetYaxis()->SetLabelSize(0.045);
 
   gr->GetZaxis()->SetTitle(zname);
   gr->GetZaxis()->CenterTitle();
@@ -215,7 +203,6 @@ void SetGr(TGraph2D *gr, TString name, TString xname, TString yname, TString zna
   gr->GetZaxis()->SetTitleSize(0.06);
   gr->GetZaxis()->SetLabelFont(42);
   gr->GetZaxis()->SetLabelOffset(0.01);
-  gr->GetZaxis()->SetLabelSize(0.045);
   ((TGaxis*)gr->GetZaxis())->SetMaxDigits(4);
 
   gr->SetLineColor(LColor);
@@ -233,40 +220,6 @@ void SetTF1(TF1 *f, int LColor=2, int LWidth=1, int LStyle=1, int Npx=1000){
   f->SetLineStyle(LStyle);
   f->SetNpx(Npx);
 }
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-void SetLegend(TLegend *l, int FStyle=1001, int FColor=0, double TSize=0.050, int NColumn=1){
-  l->SetFillStyle(FStyle);
-  l->SetFillColor(FColor);
-  l->SetTextSize(TSize);
-  l->SetNColumns(NColumn);
-}
-
-////++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//void BinLogX(TH2 *h){
-//   TAxis *axis = h->GetXaxis(); 
-//   int bins = axis->GetNbins();
-//   Axis_t from = axis->GetXmin();
-//   Axis_t to = axis->GetXmax();
-//   Axis_t width = (to - from) / bins;
-//   Axis_t *new_bins = new Axis_t[bins + 1];
-//   for (int i=0;i<=bins;i++){ new_bins[i] = TMath::Power(10,from + i*width); }
-//   axis->Set(bins, new_bins);
-//   delete new_bins; 
-//}  
-//
-////++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//void BinLogY(TH2 *h){
-//   TAxis *axis = h->GetYaxis(); 
-//   int bins = axis->GetNbins();
-//   Axis_t from = axis->GetXmin();
-//   Axis_t to = axis->GetXmax();
-//   Axis_t width = (to - from) / bins;
-//   Axis_t *new_bins = new Axis_t[bins + 1];
-//   for (int i=0;i<=bins;i++){ new_bins[i] = TMath::Power(10,from + i*width); }
-//   axis->Set(bins, new_bins);
-//   delete new_bins;
-//}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 double landaugaus(double *x, double *par) {
@@ -467,5 +420,3 @@ double GetdEdx_Scinti( double p, double M )
   return dedx;
 
 }
-
-
