@@ -10,19 +10,25 @@ CXXFLAGS = -Wall $(ROOTFLAGS)
 CXXLIBS = $(ROOTLIBS)
 
 
-TARGET= example3-3
-OBJS=   example3-3.o
+TARGET1= ex016_CompGCC
+OBJS1=   ex016_CompGCC.o
+TARGET2= ex018_CompSpeed
+OBJS2=   ex018_CompSpeed.o
 
 .PHONY: all
-all: $(TARGET)
+all: $(TARGET1) \
+     $(TARGET2) \
 
 %.o : %.cc
 	$(CXX) $(CFLAGS) -c -o $@ $< -MMD $(CXXFLAGS)
 
-$(TARGET):$(OBJS)
+$(TARGET1):$(OBJS1)
+	$(CXX) $(CFLAGS) -o $@ $^ $(CXXLIBS) $(CXXFLAGS)
+
+$(TARGET2):$(OBJS2)
 	$(CXX) $(CFLAGS) -o $@ $^ $(CXXLIBS) $(CXXFLAGS)
 
 .PHONY: clean
 clean:
-	rm -f $(TARGET).d $(TARGET).o $(TARGET)
+	rm -f *.d *.o $(TARGET1) $(TARGET2)
 

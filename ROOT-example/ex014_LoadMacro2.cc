@@ -5,7 +5,7 @@ void setgraph(TGraph *g, double val){     // Set Graph point function
   g->SetPoint(3,4.,3.9);
 }
 
-void example(double val){                 // Definition of example function
+void ex014(double val){                 // Definition of example function
   TGraph *g = new TGraph();
   setgraph(g,val);                        // Call setgraph function
   g->SetMarkerStyle(20);

@@ -12,6 +12,9 @@
 #include "TRandom.h"
 
 int main(int argc, char** argv) {
+  time_t start, end;
+  start = time(NULL);
+  time(&start);
 
   TApplication *theApp = new TApplication("App", &argc, argv);
 
@@ -41,10 +44,18 @@ int main(int argc, char** argv) {
   h1->SetFillColor(3);
   h1->SetStats(kFALSE);
 
-  for(int i=0;i<1E+7;i++){
+  int ENum = 5E+8;
+  for(int i=0;i<ENum;i++){
     double val = gRandom->Gaus(mean,wid);
     h1->Fill(val);
+
+    if(i%10000000==0){
+      end = time(NULL);
+      time(&end);
+      std::cout<<Form("\r%d / %d    %.0lf sec",i,ENum,(double)difftime(end,start))<<std::flush;
+    }
   }
+  std::cout<<std::endl;
 
   double par[3], epar;
   h1->Fit(f,"0Q","",min_x,max_x);
@@ -60,12 +71,7 @@ int main(int argc, char** argv) {
   t->SetTextColor(2);
   t->SetTextFont(42);
 
-  TCanvas *c1 = new TCanvas("c1","c1",600,500);
-  c1->Divide(1,1,1E-5,1E-5);
-  c1->cd(1)->SetMargin(0.15,0.10,0.15,0.10);
-  h1->Draw();
-  f->Draw("same");
-  t->Draw();
+  exit(1);
 
   theApp->Run();
   return 0;
