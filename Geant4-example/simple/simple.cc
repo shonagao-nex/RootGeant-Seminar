@@ -17,21 +17,44 @@
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
-int main(int argc,char** argv)
+int main( int argc, char** argv )
 {
   G4String runID = "0000";
   G4String InputFileName = "param/input.in";
   G4UIExecutive* ui = 0;
-  if ( argc == 1 ) {  // Visual
-    ui = new G4UIExecutive(argc, argv);
+
+  int ch;
+  extern char *optarg;
+  bool display = true;
+
+  while( (ch=getopt(argc,argv,"hbp:r:"))!=-1 ){
+    switch(ch){
+      case 'h':
+        std::cout<<std::endl;
+        return 0;
+        break;
+      case 'b':
+        display = false;
+        break;
+      case 'p':
+        InputFileName = optarg;
+        std::cout<<"Input File = "<<InputFileName<<std::endl;
+        break;
+      case 'r':
+        runID = optarg;
+        std::cout<<"runID = "<<runID<<std::endl;
+        break;
+      case '?':
+        std::cout<<"unknown option..."<<std::endl;
+        return 0;
+        break;
+      default:
+        std::cout<<"type -h to see help"<<std::endl;
+        return 0;
+    }
   }
-  else if ( argc == 3 ) {  // Set RunID
-    runID = argv[2];
-  }
-  else if ( argc == 4 ) {  // Set Inputfile
-    runID = argv[2];
-    InputFileName = argv[3];
-  }
+
+  if ( display == true ) { ui = new G4UIExecutive(argc, argv); }
 
   // Choose the Random engine
   G4Random::setTheEngine(new CLHEP::RanecuEngine);

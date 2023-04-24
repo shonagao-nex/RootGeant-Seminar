@@ -63,19 +63,19 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   G4Box* worldS = new G4Box( "world", worldLength/2., worldLength/2., worldLength/2. );
 
   G4LogicalVolume* worldLV = new G4LogicalVolume(
-                 worldS,          // solid
-                 mList->Vacuum,   // material
-                 "World" );       // logical volume name
+                                     worldS,          // solid
+                                     mList->Vacuum,   // material
+                                     "World" );       // logical volume name
   
   G4VPhysicalVolume* worldPV = new G4PVPlacement(
-                 0,               // rotation
-                 G4ThreeVector(), // origin
-                 worldLV,         // logical volume
-                 "World",         // physical volume name
-                 0,               // mother volume
-                 false,           // boolean operations
-                 0,               // copy number
-                 fCheckOverlaps); // checking overlaps 
+                                     0,               // rotation
+                                     G4ThreeVector(), // origin
+                                     worldLV,         // logical volume
+                                     "World",         // physical volume name
+                                     0,               // mother volume
+                                     false,           // boolean operations
+                                     0,               // copy number
+                                     fCheckOverlaps); // checking overlaps 
 
   G4VisAttributes* world_vis = new G4VisAttributes();
   world_vis->SetColor(G4Color(0.2, 0.2, 0.2, 0.05));

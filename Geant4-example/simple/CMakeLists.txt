@@ -3,7 +3,7 @@
 # Setup the project
 #
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(main)
+project(simple)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -44,17 +44,17 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(main main.cc ${sources} ${headers})
-target_link_libraries(main ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+add_executable(simple simple.cc ${sources} ${headers})
+target_link_libraries(simple ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build main. This is so that we can run the executable directly because it
+# build simple. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-#set(MAIN_SCRIPTS
-#  main.out
-#  main.in
+#set(simple_SCRIPTS
+#  simple.out
+#  simple.in
 #  gui.mac
 #  run1.mac
 #  run2.mac
@@ -73,5 +73,5 @@ target_link_libraries(main ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS main DESTINATION bin)
+install(TARGETS simple DESTINATION bin)
 

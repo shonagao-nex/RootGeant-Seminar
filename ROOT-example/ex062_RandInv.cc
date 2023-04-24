@@ -12,5 +12,4 @@ void ex062(){
   c1->cd();
   gPad->SetLogy();
   h->Draw();
-
 }

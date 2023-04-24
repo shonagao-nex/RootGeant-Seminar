@@ -1,6 +1,7 @@
 #!/bin/sh
 
+mkdir -p build
 cd build
-cmake3 ../
-make -j2
+cmake ../
+make
 cd -
