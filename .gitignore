@@ -39,6 +39,7 @@
 !*README*
 !Documents/*
 *.root
+!*roofit.root
 *build
 *Log
 *G4History.macro
