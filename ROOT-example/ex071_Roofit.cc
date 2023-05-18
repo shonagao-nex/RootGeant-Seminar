@@ -47,7 +47,7 @@ void ex071(){
   RooRealVar  slope("slope","slope",1.,0.,100.);
   RooPolynomial bg("bg","bg",val,RooArgList(slope),1);
   bg.fitTo(data,Save(kFALSE),Range("BG1,BG2"),PrintLevel(-1),SplitRange(kTRUE));
-//// Add pdf [c1*bg + (1-c1*landaugaus)]
+//// Add pdf [c1*bg + (1-c1)*landaugaus]
   RooRealVar ratio("ratio","ratio",0.5, 0, 1.0);
   RooAddPdf total("total","total",RooArgList(bg,landaugaus),ratio);
 
