@@ -3,7 +3,7 @@ typedef struct{
   int ival1;
 } TQ;
 
-void ex051(){
+void ex051a(){
   TFile *ofp = new TFile("tree.root","recreate");
   TTree *tree = new TTree("tree","tree");
   int ival;
@@ -45,4 +45,21 @@ void ex051(){
   tree->Write();
   ofp->Close();
 }
+
+void ex051b(){
+  TFile *ofp = new TFile("tree2.root","recreate");
+  TTree *tree = new TTree("tree2","tree");
+  double newval;
+  
+  tree->Branch("newval"  , &newval  , "newval/D" );
+
+  for(int i=0;i<100000;i++){
+    newval = gRandom->Gaus(0.,2.);
+    tree->Fill();
+  }
+
+  tree->Write();
+  ofp->Close();
+}
+
 
