@@ -6,4 +6,4 @@
 /control/verbose 0
 /run/verbose 0
 /run/particle/verbose 0
-/run/beamOn 1000
+/run/beamOn 10

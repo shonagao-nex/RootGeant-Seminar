@@ -2,11 +2,12 @@ OutputFile: output
 ####### Beam property ######
 BeamPar: e-        # e-,gamma,proton,pi-
 BeamType: 1           # 0:Fix beam 1:Uni 
-BeamMom:   1000.0  50.0   # momentum (MeV) range (+-%)
+BeamMom:    300.0  50.0   # momentum (MeV) range (+-%)
 BeamX:        0.0   2.0    # generate X position (mm) sigma (mm)
 BeamY:        0.0   3.0    # generate Y position (mm) sigma (mm)
 BeamZ:     -100.0   0.0    # generate Z position (mm) range (mm)
 BeamTheta:    0.0   5.0    # generate Theta (deg) range (deg)
 BeamPhi:      0.0   0.0    # generate Phi (deg) range (deg)
 TargetThick:  1.0   # target thickness (mm)
-
+FieldName:    param/field.map  # Magnetic Field File
+FieldScale:    1.0             # Field Scale

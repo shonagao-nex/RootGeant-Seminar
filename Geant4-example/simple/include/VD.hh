@@ -23,7 +23,7 @@ public:
   VD();
   ~VD();
 
-  G4VPhysicalVolume* SetVD(const G4String      &Name,
+  G4VPhysicalVolume* Place(const G4String      &Name,
                            const G4ThreeVector &Pos,
                            G4RotationMatrix    *Rot,
                            G4double             X,

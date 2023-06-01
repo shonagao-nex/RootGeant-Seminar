@@ -7,6 +7,7 @@
 #include <TFile.h>
 #include <TTree.h>
 #include <TObjArray.h>
+#include <TH1.h>
 #pragma GCC diagnostic pop
 
 #include "globals.hh"
@@ -16,13 +17,6 @@
 class G4Run;
 class G4Event;
 class G4Step;
-
-typedef struct
-{
-  G4double x;
-  G4double y;
-  G4double z;
-} TQ;
 
 class Analysis
 {
@@ -43,15 +37,19 @@ class Analysis
     void DefineRoot();
     ParamManager *paramMan;
 
+  private:
+    TH1D *h_E_gene;
+
     G4int evID;
     G4double Genmom3, Gentheta, Genphi;
     G4double Genpos_x, Genpos_y, Genpos_z;
 
     G4int VDnhit[2];
+    G4double VDx[2], VDy[2], VDz[2];
+    G4double VDpx[2], VDpy[2], VDpz[2];
     G4double VDtime[2];
-    TQ VDpos[2];
-    TQ VDmom[2];
-    G4int VDpid[2], VDtrackid[2];
     G4double VDedep[2];
+    G4double VDpid[2], VDtrackid[2];
+
 };
 #endif

@@ -44,11 +44,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   py = 0.;
   pz = BeamMom;
 
-//  h_Eg_gene_             = (TH1D*)gROOT->FindObject("h_Eg_gene");
-
   particle = particleTable->FindParticle(BeamParticle);
-
-//  if(DecayFlag==0) particle->SetPDGStable(1);
 
   if(BeamType==0){
     ParticleGun = new G4ParticleGun(1);

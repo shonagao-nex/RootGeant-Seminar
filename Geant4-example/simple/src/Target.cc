@@ -39,10 +39,11 @@ G4VPhysicalVolume* Target::target(const G4String      &Name,
   ////////////
   // visual //
   ////////////
-  G4VisAttributes* target_vis = new G4VisAttributes();
-  target_vis->SetColor(G4Color(0,0,1,0.5));
-  TargetLV->SetVisAttributes(target_vis);
-//  TargetLV->SetVisAttributes(G4VisAttributes::Invisible);
+  G4VisAttributes* vis = new G4VisAttributes();
+  vis->SetColor(G4Color(0,0,1,0.5));
+  vis->SetForceSolid(true);
+//  vis->SetVisibility(0);
+  TargetLV->SetVisAttributes(vis);
 
   return TargetPV;
 }

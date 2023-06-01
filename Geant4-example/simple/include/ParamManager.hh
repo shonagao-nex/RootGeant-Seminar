@@ -29,6 +29,9 @@ private:
   G4double bt, bp, btr, bpr;
   // Target
   double tthick;
+  // Magnet
+  G4String fieldname;
+  G4double fieldscale;
   // Physics
   int decay;
 
@@ -52,6 +55,9 @@ public:
   G4double GetBeamPhiRange()      { return bpr;     }
 
   G4double GetTargetThick()       { return tthick;  }
+
+  G4String GetFieldMapFile()      { return fieldname;  }
+  G4double GetFieldScale()        { return fieldscale; }
 
   G4int GetDecayFlag()            { return decay;   }
 

@@ -24,7 +24,9 @@
 #include "G4Colour.hh"
 
 #include "G4SystemOfUnits.hh"
-
+#include "G4TransportationManager.hh"
+#include "G4FieldManager.hh"
+#include "MagField.hh"
 #include <fstream>
 
 ////////////////////////////////////////////////////////////////
@@ -73,14 +75,15 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                                      worldLV,         // logical volume
                                      "World",         // physical volume name
                                      0,               // mother volume
-                                     false,           // boolean operations
+                                     false,           // pMany
                                      0,               // copy number
                                      fCheckOverlaps); // checking overlaps 
 
   G4VisAttributes* world_vis = new G4VisAttributes();
   world_vis->SetColor(G4Color(0.2, 0.2, 0.2, 0.05));
+  world_vis->SetVisibility(0);
   worldLV->SetVisAttributes(world_vis);
-//  logicworld->SetVisAttributes(G4VisAttributes::Invisible); 
+//  worldLV->SetVisAttributes(G4VisAttributes::Invisible);   //OLD
  
   ////////////
   // target //
@@ -88,7 +91,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   target = new Target();
   G4ThreeVector tar_pos(0.*mm, 0.*mm, 0.*mm);
   G4RotationMatrix *tar_rot = new G4RotationMatrix();
-  G4double thick = paramMan->GetTargetThick() * mm;
+  G4double thick = 5. * mm;
   target->target("TargetPV",tar_pos,tar_rot,thick,worldLV,mList->Graphite,0);
 
   //////////////////////
@@ -96,13 +99,16 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   //////////////////////
   vd0 = new VD();
   G4ThreeVector vd_pos0(0.*mm, 0.*mm, 100.*mm);
-  G4RotationMatrix *vd_rot0 = new G4RotationMatrix();
-  vd0->SetVD("VD",vd_pos0,vd_rot0,100.*mm, 100.*mm, 10.*mm, worldLV, mList->Scinti, 0);
+  vd0->Place("VD0",vd_pos0,0,100.*mm, 100.*mm, 1.*mm, worldLV, mList->Vacuum, 0);
 
   vd1 = new VD();
-  G4ThreeVector vd_pos1(0.*mm, 0.*mm, 150.*mm);
+  G4ThreeVector vd_pos1(30.*mm, 0.*mm, 300.*mm);
   G4RotationMatrix *vd_rot1 = new G4RotationMatrix();
-  vd1->SetVD("VD",vd_pos1,vd_rot1,150.*mm, 150.*mm, 10.*mm, worldLV, mList->Scinti, 1);
+  vd_rot1->rotateY(-10. * degree);
+  vd1->Place("VD1",vd_pos1,vd_rot1,200.*mm, 200.*mm, 10.*mm, worldLV, mList->Scinti, 1);
+
+  fStepLimit = new G4UserLimits(10.*mm);
+  vd1->GetDetectorLogic()->SetUserLimits(fStepLimit);
 
   return worldPV;
 }
@@ -118,6 +124,11 @@ void DetectorConstruction::ConstructSDandField()
   vd0->GetDetectorLogic()->SetSensitiveDetector(vdsd);
   vd1->GetDetectorLogic()->SetSensitiveDetector(vdsd);
 
+  // Field
+  G4FieldManager *fieldManager = G4TransportationManager::GetTransportationManager()->GetFieldManager();
+  MagField *magfield = new MagField();
+  fieldManager->SetDetectorField(magfield);
+  fieldManager->CreateChordFinder(magfield);
 }
 
 ////////////////////////////////////////////////////////////////

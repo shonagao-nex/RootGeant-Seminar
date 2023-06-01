@@ -43,6 +43,7 @@
 *build
 *Log
 *G4History.macro
+!*exampleB4c.out
 *.ps
 *.eps
 *.jpg

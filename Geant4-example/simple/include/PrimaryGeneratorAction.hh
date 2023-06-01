@@ -65,9 +65,6 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
     void GenerateUniform();
 
-    //histograms
-    TH1D *h_Eg_gene_;
-
 };
 
 #endif

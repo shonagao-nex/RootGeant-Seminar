@@ -58,8 +58,13 @@ bool ParamManager::ReadParam()
     }
     else if( sscanf( aaa, "TargetThick: %lf"   , &tthick )==1 ){
     }
-    else if( sscanf( aaa, "Decay: %d"          , &decay )==1 ){
+    else if( sscanf( aaa, "FieldName: %s"        , bbb ) ==1 ){
+      fieldname = bbb;
     }
+    else if( sscanf( aaa, "FieldScale: %lf"    , &fieldscale )==1 ){
+    }
+//    else if( sscanf( aaa, "Decay: %d"          , &decay )==1 ){
+//    }
 
   }
 

@@ -19,7 +19,7 @@ VDSD::VDSD(const G4String& Name): G4VSensitiveDetector(Name)
   for(int i=0;i<2;i++){
     std::ostringstream id;
     id << i;
-    G4String DetectorName = G4String("VD_") + id.str();
+    G4String DetectorName = G4String("VD") + id.str();
 	  collectionName.insert(DetectorName);
   }
 }

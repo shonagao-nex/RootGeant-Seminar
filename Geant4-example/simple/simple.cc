@@ -4,6 +4,7 @@
 #include "Analysis.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
+#include "PhysicsList.hh"
 
 #include "G4RunManager.hh"
 
@@ -21,13 +22,14 @@ int main( int argc, char** argv )
 {
   G4String runID = "0000";
   G4String InputFileName = "param/input.in";
+  G4String MacroFileName = "macro/gun.mac";
   G4UIExecutive* ui = 0;
 
   int ch;
   extern char *optarg;
   bool display = true;
 
-  while( (ch=getopt(argc,argv,"hbp:r:"))!=-1 ){
+  while( (ch=getopt(argc,argv,"hbp:r:m:"))!=-1 ){
     switch(ch){
       case 'h':
         std::cout<<std::endl;
@@ -39,6 +41,10 @@ int main( int argc, char** argv )
       case 'p':
         InputFileName = optarg;
         std::cout<<"Input File = "<<InputFileName<<std::endl;
+        break;
+      case 'm':
+        MacroFileName = optarg;
+        std::cout<<"Macro File = "<<MacroFileName<<std::endl;
         break;
       case 'r':
         runID = optarg;
@@ -74,8 +80,9 @@ int main( int argc, char** argv )
   runManager->SetUserInitialization(new DetectorConstruction());
 
   // Set Physics List
-  G4VModularPhysicsList* physicsList = new FTFP_BERT;
-  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+//  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+//  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+  PhysicsList *physicsList = new PhysicsList();
   runManager->SetUserInitialization(physicsList);
     
   // Set Analyzer
@@ -96,7 +103,7 @@ int main( int argc, char** argv )
   if ( ! ui ) { 
     std::cout<<"batch mode"<<std::endl;
     G4String command = "/control/execute ";
-    G4String fileName = argv[1];
+    G4String fileName = MacroFileName;
     UImanager->ApplyCommand(command+fileName);
   }
   else { 

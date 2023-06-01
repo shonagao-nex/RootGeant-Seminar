@@ -12,6 +12,8 @@
 #include "G4ios.hh"
 #include "G4SDManager.hh"
 #include <time.h>
+#include <iostream>
+#include <sstream>
 
 /////////////////////////////////
 Analysis::Analysis()
@@ -66,45 +68,42 @@ void Analysis::EndOfEvent(const G4Event *aEvent ){
   Genpos_x = aEvent->GetPrimaryVertex()->GetX0();
   Genpos_y = aEvent->GetPrimaryVertex()->GetY0();
   Genpos_z = aEvent->GetPrimaryVertex()->GetZ0();
+
+  h_E_gene->Fill( aEvent->GetPrimaryVertex()->GetPrimary()->GetTotalEnergy() );
   
   /////////////////////
   // Virtual Detector//
   /////////////////////
-  G4int vdID[2];
-  VDHitsCollection* vdHC[2];
-
   for(int i=0;i<2;i++){
-    vdID[i] = -1;
-    std::ostringstream id;
-    id << i;
-    G4String DetName_VD = G4String("VD_") + id.str();
-    vdID[i] = SDManager->GetCollectionID(DetName_VD);
-    vdHC[i] = (VDHitsCollection*)(HCTE->GetHC(vdID[i]));
-    if(!vdHC[i]){ std::cout<<"no VDHitsCollection"<<std::endl; return; }
-    G4int vdhits = vdHC[i]->entries();
+    std::ostringstream ssid;
+    ssid << i;
+    G4String DetName_VD = G4String("VD" + ssid.str());
+    G4int vdID = SDManager->GetCollectionID(DetName_VD);
+    VDHitsCollection *vdHC = (VDHitsCollection*)(HCTE->GetHC(vdID));
+    if(!vdHC){ std::cout<<"no VDHitsCollection"<<std::endl; return; }
+
+    VDnhit[i] = 0;
+    VDx[i]  = VDy[i]  = VDz[i] = -9999.;
+    VDpx[i] = VDpy[i] = VDpz[i] = -9999.;
+    VDtime[i] = VDedep[i] = -9999.;
+    VDpid[i] = VDtrackid[i] = -9.;
+
+    G4int vdhits = vdHC->entries();
     VDnhit[i] = vdhits;
 
-    VDtime[i] = -9999;
-    VDpos[i].x = VDpos[i].y = VDpos[i].z = -9999;
-    VDmom[i].x = VDmom[i].y = VDmom[i].z = -9999;
-    VDpid[i] = VDtrackid[i] = -99;
-    VDedep[i] = -9;
-
-    if( vdhits > 0 ){
-      VDHit *fVDhit_i = (*vdHC[i])[0];
-      VDHit *fVDhit_l = (*vdHC[i])[vdhits-1];
-      VDtime[i] = fVDhit_i->GetTime();
-      G4ThreeVector VDgpos = fVDhit_i->GetGPos();
-      G4ThreeVector VDgmom = fVDhit_i->GetGMom();
-      VDpos[i].x = VDgpos.x(); VDpos[i].y = VDgpos.y(); VDpos[i].z = VDgpos.z();
-      VDmom[i].x = VDgmom.x(); VDmom[i].y = VDgmom.y(); VDmom[i].z = VDgmom.z();
-      VDpid[i]      = fVDhit_i->GetPID();
-      VDtrackid[i]  = fVDhit_i->GetTrackID();
-      VDedep[i]     = fVDhit_l->GetEdep();
+    for(int h=0;h<vdhits;h++){
+      VDHit *fVDhit = (*vdHC)[h];
+      G4ThreeVector VDgpos = fVDhit->GetGPos();
+      G4ThreeVector VDgmom = fVDhit->GetGMom();
+      VDx[i]  = VDgpos.x();  VDy[i]  = VDgpos.y();  VDz[i]  = VDgpos.z();
+      VDpx[i] = VDgmom.x();  VDpy[i] = VDgmom.y();  VDpz[i] = VDgmom.z();
+      VDtime[i] = fVDhit->GetTime();
+      VDedep[i] = fVDhit->GetEdep();
+      VDpid[i]  = fVDhit->GetPID();
+      VDtrackid[i] = fVDhit->GetTrackID();
     }
-   
   }
-  
+
   fTree->Fill();
 }
 
@@ -123,7 +122,7 @@ void Analysis::DefineRoot(){
     return;
   }
 
-  new TH1D("h_Eg_gene"      ,"h_Eg_gene"       ,200,0,2000);
+  h_E_gene = new TH1D("h_E_gene"      ,"h_E_gene"       ,200,0,500);
   
   fTree = new TTree("tree","geant4");
   fTree->Branch("eventid" , &evID      , "eventid/I"     );
@@ -134,15 +133,30 @@ void Analysis::DefineRoot(){
   fTree->Branch("y_i"     , &Genpos_y  , "y_i/D"         );
   fTree->Branch("z_i"     , &Genpos_z  , "z_i/D"         );
   
-  //Virtual Detector
-  fTree->Branch("vdnhit"    , VDnhit     ,      "vdnhit[2]/I"      );
-  fTree->Branch("vdpos0"    ,&VDpos[0]   ,      "x/D:y/D:z/D"      );
-  fTree->Branch("vdmom0"    ,&VDmom[0]   ,      "x/D:y/D:z/D"      );
-  fTree->Branch("vdpos1"    ,&VDpos[1]   ,      "x/D:y/D:z/D"      );
-  fTree->Branch("vdmom1"    ,&VDmom[1]   ,      "x/D:y/D:z/D"      );
-  fTree->Branch("vdtime"    , VDtime     ,      "vdtime[2]/D"      );
-  fTree->Branch("vdpid"     , VDpid      ,      "vdpid[2]/I"       );
-  fTree->Branch("vdtrackid" , VDtrackid  ,      "vdtrackid[2]/I"   );
-  fTree->Branch("vdedep"    , VDedep     ,      "vdedep[2]/D"      );
+//Virtual Detector
+  fTree->Branch("vd0nhit"    ,&VDnhit[0]    ,      "vd0nhit/I"    );
+  fTree->Branch("vd0x"       ,&VDx[0]       ,      "vd0x/D"       );
+  fTree->Branch("vd0y"       ,&VDy[0]       ,      "vd0y/D"       );
+  fTree->Branch("vd0z"       ,&VDz[0]       ,      "vd0z/D"       );
+  fTree->Branch("vd0px"      ,&VDpx[0]      ,      "vd0px/D"      );
+  fTree->Branch("vd0py"      ,&VDpy[0]      ,      "vd0py/D"      );
+  fTree->Branch("vd0pz"      ,&VDpz[0]      ,      "vd0pz/D"      );
+  fTree->Branch("vd0time"    ,&VDtime[0]    ,      "vd0time/D"    );
+  fTree->Branch("vd0edep"    ,&VDedep[0]    ,      "vd0edep/D"    );
+  fTree->Branch("vd0pid"     ,&VDpid[0]     ,      "vd0pid/I"     );
+  fTree->Branch("vd0trackid" ,&VDtrackid[0] ,      "vd0trackid/I" );
+
+  fTree->Branch("vd1nhit"    ,&VDnhit[1]    ,      "vd1nhit/I"    );
+  fTree->Branch("vd1x"       ,&VDx[1]       ,      "vd1x/D"       );
+  fTree->Branch("vd1y"       ,&VDy[1]       ,      "vd1y/D"       );
+  fTree->Branch("vd1z"       ,&VDz[1]       ,      "vd1z/D"       );
+  fTree->Branch("vd1px"      ,&VDpx[1]      ,      "vd1px/D"      );
+  fTree->Branch("vd1py"      ,&VDpy[1]      ,      "vd1py/D"      );
+  fTree->Branch("vd1pz"      ,&VDpz[1]      ,      "vd1pz/D"      );
+  fTree->Branch("vd1time"    ,&VDtime[1]    ,      "vd1time/D"    );
+  fTree->Branch("vd1edep"    ,&VDedep[1]    ,      "vd1edep/D"    );
+  fTree->Branch("vd1pid"     ,&VDpid[1]     ,      "vd1pid/I"     );
+  fTree->Branch("vd1trackid" ,&VDtrackid[1] ,      "vd1trackid/I" );
+
 }
 
