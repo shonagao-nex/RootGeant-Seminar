@@ -36,6 +36,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     ParamManager *paramMan;
     Target *target;
     VD *vd0, *vd1;
+    VD *tof;
 
     G4bool  fCheckOverlaps; 
 };

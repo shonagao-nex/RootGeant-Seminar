@@ -48,3 +48,26 @@ G4VPhysicalVolume* VD::Place(const G4String      &Name,
   return physiVD;
 }
 
+
+G4VPhysicalVolume* VD::PlaceTOF(const G4String      &Name,
+                                const G4ThreeVector &Pos,
+                                G4RotationMatrix    *Rot,
+                                G4LogicalVolume     *Mother,
+                                G4Material          *Material)
+{
+
+  solidVD = new G4Box(Name+"S", 50./2.*mm, 100./2.*mm, 5./2.*mm);
+  logicVD = new G4LogicalVolume(solidVD, Material, Name+"LV");
+  for(int i=0;i<3;i++){
+    new G4PVPlacement(Rot, G4ThreeVector(Pos.x()+i*50.*mm,Pos.y(),Pos.z()), logicVD, Name+"PV", Mother, false, i);
+  }
+
+// visual //
+  G4VisAttributes *vis = new G4VisAttributes();
+  vis->SetColor(G4Color(0,0,1.0,0.5));
+  vis->SetVisibility(1);
+  logicVD->SetVisAttributes(vis);
+
+  return physiVD;
+}
+

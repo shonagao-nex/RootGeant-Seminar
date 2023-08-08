@@ -2,6 +2,8 @@
 #include "PrimaryGeneratorAction.hh"
 #include "VDSD.hh"
 #include "VDHit.hh"
+//#include "TOFSD.hh"
+//#include "TOFHit.hh"
 
 #include "G4Run.hh"
 #include "G4RunManager.hh"
@@ -104,6 +106,26 @@ void Analysis::EndOfEvent(const G4Event *aEvent ){
     }
   }
 
+  /////////////////
+  // TOF Detector//
+  /////////////////
+//  for(int i=0;i<3;i++){
+//    std::ostringstream ssid;
+//    ssid << i;
+//    G4String DetName_TOF = G4String("TOF" + ssid.str());
+//    G4int tofID = SDManager->GetCollectionID(DetName_TOF);
+//    TOFHitsCollection *tofHC = (TOFHitsCollection*)(HCTE->GetHC(tofID));
+//    if(!tofHC){ std::cout<<"no TOFHitsCollection"<<std::endl; return; }
+//
+//    TOFedep[i] = -9999.;
+//    G4int tofhits = tofHC->entries();
+//
+//    for(int h=0;h<tofhits;h++){
+//      TOFHit *fTOFhit = (*tofHC)[h];
+//      TOFedep[i] = fTOFhit->GetEdep();
+//    }
+//  }
+
   fTree->Fill();
 }
 
@@ -158,5 +180,6 @@ void Analysis::DefineRoot(){
   fTree->Branch("vd1pid"     ,&VDpid[1]     ,      "vd1pid/I"     );
   fTree->Branch("vd1trackid" ,&VDtrackid[1] ,      "vd1trackid/I" );
 
+//  fTree->Branch("tofedep"    , TOFedep      ,      "tofedep[3]/D" );
 }
 

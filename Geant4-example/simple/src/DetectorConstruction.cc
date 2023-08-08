@@ -5,6 +5,7 @@
 #include "Target.hh"
 #include "VD.hh"
 #include "VDSD.hh"
+//#include "TOFSD.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -107,6 +108,9 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   vd_rot1->rotateY(-10. * degree);
   vd1->Place("VD1",vd_pos1,vd_rot1,200.*mm, 200.*mm, 10.*mm, worldLV, mList->Scinti, 1);
 
+//  tof = new VD();
+//  tof->PlaceTOF("TOF",G4ThreeVector(50.*mm,0,450.*mm),0, worldLV, mList->Scinti);
+
   fStepLimit = new G4UserLimits(10.*mm);
   vd1->GetDetectorLogic()->SetUserLimits(fStepLimit);
 
@@ -123,6 +127,10 @@ void DetectorConstruction::ConstructSDandField()
   SDmanager->AddNewDetector(vdsd);
   vd0->GetDetectorLogic()->SetSensitiveDetector(vdsd);
   vd1->GetDetectorLogic()->SetSensitiveDetector(vdsd);
+
+//  TOFSD* tofsd = new TOFSD("TOFSD");
+//  SDmanager->AddNewDetector(tofsd);
+//  tof->GetDetectorLogic()->SetSensitiveDetector(tofsd);
 
   // Field
   G4FieldManager *fieldManager = G4TransportationManager::GetTransportationManager()->GetFieldManager();

@@ -33,6 +33,12 @@ public:
                            G4Material          *Material,
                            int                  ID);
 
+  G4VPhysicalVolume* PlaceTOF(const G4String      &Name,
+                               const G4ThreeVector &Pos,
+                               G4RotationMatrix    *Rot,
+                               G4LogicalVolume     *Mother,
+                               G4Material          *Material);
+
   G4LogicalVolume *GetDetectorLogic() { return logicVD; }
 
 private:

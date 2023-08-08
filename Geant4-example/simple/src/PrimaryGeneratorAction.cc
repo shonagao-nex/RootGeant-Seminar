@@ -58,7 +58,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 /////////////////////////////////////////////////////////
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
-  delete ParticleGun;
+//  delete ParticleGun;
 }
 
 /////////////////////////////////////////////////////////
@@ -82,6 +82,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
   ParticleGun->GeneratePrimaryVertex(anEvent);
+  if(BeamType > 0) delete ParticleGun;
 }
 
 /////////////////////////////////////////////////////////

@@ -51,5 +51,7 @@ class Analysis
     G4double VDedep[2];
     G4double VDpid[2], VDtrackid[2];
 
+    G4double TOFedep[3];
+
 };
 #endif

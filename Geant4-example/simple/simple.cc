@@ -32,7 +32,11 @@ int main( int argc, char** argv )
   while( (ch=getopt(argc,argv,"hbp:r:m:"))!=-1 ){
     switch(ch){
       case 'h':
-        std::cout<<std::endl;
+        std::cout<<"-h  this help"<<std::endl;
+        std::cout<<"-b  batch mode"<<std::endl;
+        std::cout<<"-p  input file name (default:param/input.in)"<<std::endl;
+        std::cout<<"-m  macro file name (default:macro/gun.mac in bach mode)"<<std::endl;
+        std::cout<<"-r  runID"<<std::endl;
         return 0;
         break;
       case 'b':
@@ -50,12 +54,13 @@ int main( int argc, char** argv )
         runID = optarg;
         std::cout<<"runID = "<<runID<<std::endl;
         break;
-      case '?':
-        std::cout<<"unknown option..."<<std::endl;
-        return 0;
-        break;
       default:
         std::cout<<"type -h to see help"<<std::endl;
+        std::cout<<"-h  this help"<<std::endl;
+        std::cout<<"-b  batch mode"<<std::endl;
+        std::cout<<"-p  input file name (default:param/input.in)"<<std::endl;
+        std::cout<<"-m  macro file name (default:macro/gun.mac in bach mode)"<<std::endl;
+        std::cout<<"-r  runID"<<std::endl;
         return 0;
     }
   }
