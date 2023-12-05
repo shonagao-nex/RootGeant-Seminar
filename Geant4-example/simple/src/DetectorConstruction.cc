@@ -111,7 +111,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 //  tof = new VD();
 //  tof->PlaceTOF("TOF",G4ThreeVector(50.*mm,0,450.*mm),0, worldLV, mList->Scinti);
 
-  fStepLimit = new G4UserLimits(10.*mm);
+  fStepLimit = new G4UserLimits(1.*mm);
+  worldLV->SetUserLimits(fStepLimit);
   vd1->GetDetectorLogic()->SetUserLimits(fStepLimit);
 
   return worldPV;

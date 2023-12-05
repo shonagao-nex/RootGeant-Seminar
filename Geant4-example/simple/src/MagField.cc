@@ -80,22 +80,25 @@ void MagField::GetFieldValue(const double Point[3], double *Bfield)const
   G4ThreeVector pos(Point[0],Point[1],Point[2]);
 
   //xt,yt,zt coordinate should be same with magnetic field map coordinate (global)
-  double xt = pos.x()/cm;
-  double yt = pos.y()/cm;
-  double zt = pos.z()/cm;
+  double xt = pos.x() / cm;
+  double yt = pos.y() / cm;
+  double zt = pos.z() / cm;
   
   //G4cout<<xt<<" "<<yt<<" "<<zt<<" "<<X0<<" "<<Y0<<" "<<Z0<<" "<<dX<<" "<<dY<<" "<<dZ<<G4endl;
 
-  //if( yt<0 ){
-  //  yt    *= -1;
-  //  Xflag *= -1;
-  //  Yflag *= -1;
-  //}
+  if( yt<0 ){
+    yt    *= -1;
+    Xflag *= -1;
+    Zflag *= -1;
+  }
   
   int ix1, iy1, iz1, ix2, iy2, iz2;
-  ix1 = int((xt-X0+0.5*dX)/dX-1);
-  iy1 = int((yt-Y0+0.5*dY)/dY-1);
-  iz1 = int((zt-Z0+0.5*dZ)/dZ-1);
+//  ix1 = int((xt-X0+0.5*dX)/dX-1);
+//  iy1 = int((yt-Y0+0.5*dY)/dY-1);
+//  iz1 = int((zt-Z0+0.5*dZ)/dZ-1);
+  ix1 = int( floor( (xt-X0)/dX ) );
+  iy1 = int( floor( (yt-Y0)/dY ) );
+  iz1 = int( floor( (zt-Z0)/dZ ) );
   //  G4cout<<ix1<<" "<<iy1<<" "<<iz1<<G4endl;
 
   double wx1, wy1, wz1, wx2, wy2, wz2;
@@ -124,10 +127,13 @@ void MagField::GetFieldValue(const double Point[3], double *Bfield)const
     Bfield[1] = Yflag*by*scale * gauss;
     Bfield[2] = Zflag*bz*scale * gauss;
       
-    //G4cout <<"Magnetic: "<<Point[0]<<" "<<Point[1]<<" "<<Point[2]<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
+//    G4cout <<"Magnetic: "<<ix1<<" "<<iy1<<" "<<iz1<<" "<<Point[0]<<" "<<Point[1]<<" "<<Point[2]<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
   }
-  //  G4cout <<ix1<<" "<<iy1<<" "<<iz1<<" "<<" "<<bx<<" "<<by<<" "<<bz<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
-//  G4cout <<"Magnetic: "<<xt<<" "<<yt<<" "<<zt<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
+//  else{
+//    G4cout <<"None: "<<ix1<<" "<<iy1<<" "<<iz1<<" "<<Point[0]<<" "<<Point[1]<<" "<<Point[2]<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
+//  }
+//  G4cout <<ix1<<" "<<iy1<<" "<<iz1<<" "<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
+//  G4cout <<"Magnetic: "<<ix1<<" "<<iy1<<" "<<iz1<<" "<<xt<<" "<<yt<<" "<<zt<<" "<<Bfield[0]<<" "<<Bfield[1]<<" "<<Bfield[2]<<G4endl;
 
 }
 
